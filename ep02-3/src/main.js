@@ -22,26 +22,23 @@ async function main() {
     onIncreaseClick,
   });
 
-  const { increase, decrease, getTotalCount } = setupCounter();
+  const { increase, decrease, getTotalCount, getCountByProductId } =
+    setupCounter();
 
   const updateTotalCount = (totalCount) => {
     document.querySelector(".total_count").innerHTML = `(${totalCount})`;
   };
 
   function onIncreaseClick({ productId }) {
-    const count = increase({ productId });
-    updateProductCount({ productId, count });
-    if (count === 1) {
+    if (getCountByProductId({ productId }) === 0) {
       addProductToCart({ product: getProductById({ productId }) });
     }
-    updateCartCount({ productId, count });
+    increase({ productId });
     updateTotalCount(getTotalCount());
   }
 
   function onDecreaseClick({ productId }) {
     const count = decrease({ productId });
-    updateProductCount({ productId, count });
-    updateCartCount({ productId, count });
     if (count === 0) {
       removeProductFromCart({ product: getProductById({ productId }) });
     }

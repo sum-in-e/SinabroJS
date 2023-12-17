@@ -1,7 +1,7 @@
 import test from "./test.products.json";
 import { findElement } from "./utils";
 
-export function getProductElement(product, count = 0) {
+export function getProductElement(product) {
   const element = document.createElement("div");
   element.classList.add("product");
   element.setAttribute("data-product-id", product.id);
@@ -12,9 +12,7 @@ export function getProductElement(product, count = 0) {
         <span>Price: ${product.regularPrice}</span>
         <div>
           <button type="button" class="btn-decrease bg-green-200 text-green-800 hover:bg-green-300 py-1 px-3 rounded-full disabled:cursor-not-allowed disabled:opacity-50">-</button>
-          <span class="cart-count text-green-800">${
-            count !== 0 ? count : ""
-          }</span>
+          <span class="cart-count text-green-800" data-subscribe-to="countMap" data-subscription-path="${product.id}"></span>
           <button type="button" class="btn-increase bg-green-200 text-green-800 hover:bg-green-300 py-1 px-3 rounded-full disabled:cursor-not-allowed disabled:opacity-50">+</button>
         </div>
       </div>
