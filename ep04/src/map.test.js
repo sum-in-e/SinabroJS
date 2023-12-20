@@ -1,98 +1,97 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from "vitest";
 
-describe('map method', () => {
-  it('squares the elements', () => {
+describe("map method", () => {
+  it("squares the elements", () => {
     const numbers = [1, 2, 3, 4, 5];
-    // TODO: do something here
-    const squares = [];
+    const squares = numbers.map((num) => num * num);
     expect(squares).toEqual([1, 4, 9, 16, 25]);
   });
 
-  it('makes strings uppercase', () => {
-    const words = ['hello', 'world'];
-    // TODO: do something here
-    const uppercasedWords = [];
-    expect(uppercasedWords).toEqual(['HELLO', 'WORLD']);
+  it("makes strings uppercase", () => {
+    const words = ["hello", "world"];
+    const uppercasedWords = words.map((word) => word.toUpperCase());
+    expect(uppercasedWords).toEqual(["HELLO", "WORLD"]);
   });
 
-  it('extracts user id', () => {
+  it("extracts user id", () => {
     const users = [
       {
         id: 1,
-        name: 'a',
+        name: "a",
       },
       {
         id: 2,
-        name: 'b',
+        name: "b",
       },
       {
         id: 3,
-        name: 'c',
+        name: "c",
       },
     ];
-    // TODO: do something here
-    const userIds = [];
+    const userIds = users.map((user) => user.id);
     expect(userIds).toEqual([1, 2, 3]);
   });
 
-  it('extracts title and year', () => {
+  it("extracts title and year", () => {
     const movies = [
       {
-        title: 'Rent',
+        title: "Rent",
         year: 2005,
-        genres: ['Musical', 'Drama'],
+        genres: ["Musical", "Drama"],
       },
       {
-        title: 'Tick, Tick... Boom!',
+        title: "Tick, Tick... Boom!",
         year: 2021,
-        genres: ['Drama', 'Biography'],
+        genres: ["Drama", "Biography"],
       },
     ];
-    // TODO: do something here
-    const titlesAndYears = [];
+    const titlesAndYears = movies.map(({ title, year }) => {
+      return { title, year };
+    });
     expect(titlesAndYears).toEqual([
       {
-        title: 'Rent',
+        title: "Rent",
         year: 2005,
       },
       {
-        title: 'Tick, Tick... Boom!',
+        title: "Tick, Tick... Boom!",
         year: 2021,
       },
     ]);
   });
 
-  it('adds genre property without mutating the source data', () => {
+  it("adds genre property without mutating the source data", () => {
     const movies = [
       {
-        title: 'Rent',
+        title: "Rent",
         year: 2005,
-        genres: ['Musical', 'Drama'],
+        genres: ["Musical", "Drama"],
       },
       {
-        title: 'Tick, Tick... Boom!',
+        title: "Tick, Tick... Boom!",
         year: 2021,
-        genres: ['Drama', 'Biography'],
+        genres: ["Drama", "Biography"],
       },
     ];
 
-    // TODO: do something here
-    const movies2 = [];
+    const movies2 = movies.map((movie) => {
+      return { ...movie, genre: movie.genres.join(" / ") };
+    });
     expect(movies2).toEqual([
       {
-        title: 'Rent',
+        title: "Rent",
         year: 2005,
-        genres: ['Musical', 'Drama'],
-        genre: 'Musical / Drama',
+        genres: ["Musical", "Drama"],
+        genre: "Musical / Drama",
       },
       {
-        title: 'Tick, Tick... Boom!',
+        title: "Tick, Tick... Boom!",
         year: 2021,
-        genres: ['Drama', 'Biography'],
-        genre: 'Drama / Biography',
+        genres: ["Drama", "Biography"],
+        genre: "Drama / Biography",
       },
     ]);
 
-    expect(movies[0]).not.toHaveProperty('genre');
+    expect(movies[0]).not.toHaveProperty("genre");
   });
 });
